@@ -1,0 +1,124 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="IAGWeb.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - IAG</title>
+
+    <asp:PlaceHolder runat="server">
+        <%//: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <%--<webopt:bundlereference runat="server" path="~/css" />--%>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <!--[if lte IE 8]><script src="Scripts/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+
+</head>
+<body>
+    <form runat="server">
+        <div id="header">
+                <a class="logo" runat="server"><asp:Image ImageUrl="~/Content/logo.png" runat="server" width="40" hight="57"/><strong>Transilvania University of Brasov</strong> <titlu> Applied Informatics in german</titlu></a>
+				<nav id="nav">
+					<ul>
+						<li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/Schedule">Orar</a></li>
+                        <asp:LoginView runat="server" ViewStateMode="Disabled">
+                            <LoggedInTemplate>
+                                <li><a runat="server" href="~/Courses">Cursuri</a></li>
+                                <li><a runat="server" href="~/Projects">Proiecte</a></li>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                        <asp:LoginView runat="server" ViewStateMode="Disabled">
+                            <RoleGroups>
+                                <asp:RoleGroup Roles="Admin">
+                                    <ContentTemplate>
+                                            <li><a runat="server" href="~/Admin/Users" title="Users">Users</a></li>
+                                            <li><a runat="server" href="~/Admin/Roles" title="Roles">Roles</a></li>
+                                            <li><a runat="server" href="~/Admin/UserRoles" title="User Roles">User Roles</a></li>
+                                    </ContentTemplate>
+                                </asp:RoleGroup>
+                            </RoleGroups>
+                        </asp:LoginView>
+                        <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                                <li><a runat="server" href="~/Account/Register">Register</a></li>
+                                <li><a runat="server" href="~/Account/Login">Log in</a></li>
+                            </AnonymousTemplate>
+                        <LoggedInTemplate>
+                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                <li>
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                </li>
+                            </LoggedInTemplate>
+                    </asp:LoginView>
+
+                        <%--<li><a href="index.html">Home</a></li>
+						<li>
+							<a href="#">Dropdown</a>
+							<ul>
+								<li><a href="#">Link One</a></li>
+								<li><a href="#">Link Two</a></li>
+								<li><a href="#">Link Three</a></li>
+								<li>
+									<a href="#">Submenu</a>
+									<ul>
+										<li><a href="#">Link One</a></li>
+										<li><a href="#">Link Two</a></li>
+										<li><a href="#">Link Three</a></li>
+										<li><a href="#">Link Four</a></li>
+									</ul>
+								</li>
+								<li><a href="#">Link Five</a></li>
+							</ul>
+						</li>
+						<li class="active"><a href="generic.html">Generic</a></li>
+						<li><a href="elements.html">Elements</a></li>--%>
+					</ul>
+                    
+				</nav>
+			</div>
+
+        <!-- Main -->
+			<div id="main">
+
+				<!-- Header -->
+					<header>
+						<h1>
+                            <asp:ContentPlaceHolder ID="TitleContent" runat="server">
+                            </asp:ContentPlaceHolder>
+						</h1>
+					</header>
+
+				<!-- Content -->
+					<section id="content" class="wrapper">
+			            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </section>
+
+			</div>
+                
+            <div id="footer">
+			    <p>&copy; <%: DateTime.Now.Year %> - IAG</p>
+            </div>
+        
+
+    </form>
+
+    <!-- Scripts -->
+	<script src="Scripts/jquery.min.js"></script>
+	<script src="Scripts/jquery.dropotron.min.js"></script>
+	<script src="Scripts/jquery.scrollex.min.js"></script>
+	<script src="Scripts/skel.min.js"></script>
+	<script src="Scripts/util.js"></script>
+	<!--[if lte IE 8]><script src="Scripts/ie/respond.min.js"></script><![endif]-->
+	<script src="Scripts/main.js"></script>
+
+</body>
+</html>

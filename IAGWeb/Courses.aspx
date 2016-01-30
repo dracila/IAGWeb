@@ -3,6 +3,16 @@
     <asp:Panel runat="server">
         <h4>Cursuri Curente</h4>
         <hr />
+        <h5>Filtre</h5>
+        An: 
+        <asp:DropDownList ID="ddlYear" runat="server"></asp:DropDownList>
+        <br />
+        Materie:
+        <asp:DropDownList ID="ddlSubject" runat="server"></asp:DropDownList>
+        <br />
+        <asp:Button ID="btnRefresh" runat="server" Text="Reincarca" OnClick="btnRefresh_Click" CssClass="btn btn-default" />
+        <br />
+        <br />
         <asp:GridView ID="CoursesGrid" runat="server"  AutoGenerateColumns="False" OnRowDataBound="CoursesGrid_RowDataBound" OnRowCommand="CoursesGrid_RowCommand"
             GridLines="None"  
             AllowPaging="false"  

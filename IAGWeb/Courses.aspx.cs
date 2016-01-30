@@ -21,13 +21,39 @@ namespace IAGWeb
             if (!IsPostBack)
             {
                 LoadCourses();
+                LoadFilters();
             }
         }
 
-        protected void LoadCourses()
+        protected void LoadCourses(string year = null, string subject = null)
         {
-            CoursesGrid.DataSource = new IAGWeb.DAL.StudentInformerDbContext().Courses.ToArray();
+            var courses = new StudentInformerDbContext().Courses.AsEnumerable();
+            if (!string.IsNullOrWhiteSpace(year))
+            {
+                courses = courses.Where(c => c.Year.Equals(year));
+            }
+            if (!string.IsNullOrWhiteSpace(subject))
+            {
+                courses = courses.Where(c => c.Subject.Equals(subject));
+            }
+            CoursesGrid.DataSource = courses.ToArray();
             CoursesGrid.DataBind();
+        }
+
+        protected void LoadFilters()
+        {
+            var courses = new StudentInformerDbContext().Courses.AsEnumerable();
+
+            var years = courses.Select(c => c.Year).Distinct().OrderBy(c => c);
+            var subjects = courses.Select(c => c.Subject).Distinct().OrderBy(c=> c);
+
+            ddlYear.Items.Clear();
+            ddlSubject.Items.Clear();
+            ddlYear.Items.Add(" - Toate - ");
+            ddlSubject.Items.Add(" - Toate - ");
+
+            ddlYear.Items.AddRange(years.Select(y=> new ListItem(y)).ToArray());
+            ddlSubject.Items.AddRange(subjects.Select(s => new ListItem(s)).ToArray());
         }
 
         protected void AddCourse_Click(object sender, EventArgs e)
@@ -74,6 +100,7 @@ namespace IAGWeb
             ((Label)ProfessorLogin.FindControl("StatusMessageLabel")).Text = "Curs adaugat cu succes.";
 
             LoadCourses();
+            LoadFilters();
 
         }
 
@@ -128,8 +155,17 @@ namespace IAGWeb
                     DatabaseContext.Courses.Remove(course);
                     DatabaseContext.SaveChanges();
                     LoadCourses();
+                    LoadFilters();
                     break;
             }
+        }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            var year = ddlYear.SelectedIndex != 0 ? ddlYear.SelectedValue : null;
+            var subject = ddlSubject.SelectedIndex != 0 ? ddlSubject.SelectedValue : null;
+            LoadCourses(year, subject);
+            
         }
     }
 }

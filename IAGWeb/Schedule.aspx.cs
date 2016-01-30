@@ -32,7 +32,7 @@ namespace IAGWeb
         {
             ViewPanel.Visible = true;
             EditPanel.Visible = false;
-            UpdateButton.Visible = UserManager.IsInRole(LoggedInUserId, "Admin") || UserManager.IsInRole(LoggedInUserId, "Professor");
+            UpdateButton.Visible = LoggedInUserId != null && (UserManager.IsInRole(LoggedInUserId, "Admin") || UserManager.IsInRole(LoggedInUserId, "Professor"));
             UpdateButton.CommandArgument = "update";
         }
 

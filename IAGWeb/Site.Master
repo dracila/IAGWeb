@@ -32,8 +32,10 @@
                             <LoggedInTemplate>
                                 <li><a runat="server" href="~/Courses">Cursuri</a></li>
                                 <li><a runat="server" href="~/Projects">Proiecte</a></li>
+                                <li><a runat="server" href="~/Collective">Colectiv</a></li>
                             </LoggedInTemplate>
                         </asp:LoginView>
+                        <li><a runat="server" href="~/Info.aspx">Utile</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                         <asp:LoginView runat="server" ViewStateMode="Disabled">
                             <RoleGroups>

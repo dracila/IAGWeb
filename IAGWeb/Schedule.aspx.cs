@@ -14,46 +14,135 @@ namespace IAGWeb
 {
     public partial class Schedule : BaseDataPage
     {
+        private string _schedulesFolder;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            _schedulesFolder = Server.MapPath("Schedules");
+
             if (!IsPostBack)
             {
                 InitializeControls();
-                LoadSchedule();
+                LoadSchedules(true);
             }
         }
 
-        private void LoadSchedule()
+        private void LoadSchedules(bool loadFirst = false)
         {
-            ViewDiv.InnerHtml = File.ReadAllText(Server.MapPath("Schedule.html"));
+            // create folder if not exists
+            if (!Directory.Exists(_schedulesFolder))
+            {
+                Directory.CreateDirectory(_schedulesFolder);
+            }
+            else
+            {
+                var files = Directory.GetFiles(_schedulesFolder).Select(f => new FileInfo(f)).OrderBy(f => f.Name).ToArray();
+                rptSchedules.DataSource = files;
+                rptSchedules.DataBind();
+                if (loadFirst)
+                {
+                    if (files.Length > 0)
+                    {
+                        LoadSchedule(files[0]);
+                    }
+                    else
+                    {
+                        LoadSchedule(null);
+                    }
+                }
+            }
+        }
+
+        private void LoadSchedule(FileInfo file)
+        {
+            if (file!= null)
+            {
+                lblCurrentSchedule.Text = file.Name;
+                ViewDiv.InnerHtml = File.ReadAllText(file.FullName);
+            }
+            else
+            {
+                lblCurrentSchedule.Text = string.Empty;
+                ViewDiv.InnerHtml = string.Empty;
+            }
         }
 
         private void InitializeControls()
         {
             ViewPanel.Visible = true;
             EditPanel.Visible = false;
-            UpdateButton.Visible = LoggedInUserId != null && (UserManager.IsInRole(LoggedInUserId, "Admin") || UserManager.IsInRole(LoggedInUserId, "Professor"));
+            AdminPanel.Visible = LoggedInUserId != null && (UserManager.IsInRole(LoggedInUserId, "Admin") || UserManager.IsInRole(LoggedInUserId, "Professor"));
             UpdateButton.CommandArgument = "update";
         }
 
-        protected void UpdateButton_Click(object sender, EventArgs e)
+        protected void AdminButton_Click(object sender, EventArgs e)
         {
-            switch(UpdateButton.CommandArgument)
+            var button = (Button)sender;
+            switch (button.CommandName)
             {
-                case "update":
-                    ViewPanel.Visible = false;
-                    EditPanel.Visible = true;
-                    UpdateButton.CommandArgument = "save";
-                    CKEditor1.Text = File.ReadAllText(Server.MapPath("Schedule.html"));
+                case "add":
+                    try
+                    {
+                        var fileName = Path.Combine(_schedulesFolder, txtNewSchedule.Text);
+                        if (File.Exists(fileName))
+                        {
+                            lblStatus.Text = "Exista deja un orar cu acest nume.";
+                        }
+                        else
+                        {
+                            File.Create(fileName).Close();
+                            LoadSchedules();
+                            LoadSchedule(new FileInfo(fileName));
+                            txtNewSchedule.Text = string.Empty;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        lblStatus.Text = "Orarul nu a putut fi adaugat! " + ex.ToString();
+                    }
                     break;
-                case "save":
-                    ViewPanel.Visible = true;
-                    EditPanel.Visible = false;
-                    UpdateButton.CommandArgument = "update";
-                    File.WriteAllText(Server.MapPath("Schedule.html"), CKEditor1.Text);
-                    ViewDiv.InnerHtml = CKEditor1.Text;
+                case "delete":
+                    if (!string.IsNullOrEmpty(lblCurrentSchedule.Text))
+                    {
+                        try
+                        {
+                            File.Delete(Path.Combine(_schedulesFolder, lblCurrentSchedule.Text));
+                            LoadSchedules(true);
+                        }
+                        catch (Exception ex)
+                        {
+                            lblStatus.Text = "Orarul nu a putut fi sters! " + ex.ToString();
+                        }
+                    }
+                    break;
+                case "update":
+                    if (!string.IsNullOrEmpty(lblCurrentSchedule.Text))
+                    {
+                        switch (button.CommandArgument)
+                        {
+                            case "update":
+                                ViewPanel.Visible = false;
+                                EditPanel.Visible = true;
+                                UpdateButton.CommandArgument = "save";
+                                CKEditor1.Text = File.ReadAllText(Path.Combine(_schedulesFolder, lblCurrentSchedule.Text));
+                                break;
+                            case "save":
+                                ViewPanel.Visible = true;
+                                EditPanel.Visible = false;
+                                UpdateButton.CommandArgument = "update";
+                                File.WriteAllText(Path.Combine(_schedulesFolder, lblCurrentSchedule.Text), CKEditor1.Text);
+                                ViewDiv.InnerHtml = CKEditor1.Text;
+                                break;
+                        }
+                    }
                     break;
             }
-        } 
+        }
+        
+        protected void btnSelectSchedule_Click(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            LoadSchedule(new FileInfo(button.CommandArgument));
+        }
     }
 }

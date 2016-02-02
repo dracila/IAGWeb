@@ -23,7 +23,16 @@ namespace IAGWeb
             if (!IsPostBack)
             {
                 InitializeControls();
-                LoadSchedules(true);
+                if (string.IsNullOrWhiteSpace(Request.QueryString["name"]))
+                {
+                    LoadSchedules(true);
+                }
+                else
+                {
+                    var fileName = Path.Combine(_schedulesFolder, Request.QueryString["name"]);
+                    LoadSchedules(false);
+                    LoadSchedule(new FileInfo(fileName));
+                }
             }
         }
 
@@ -55,7 +64,7 @@ namespace IAGWeb
 
         private void LoadSchedule(FileInfo file)
         {
-            if (file!= null)
+            if (file!= null && file.Exists)
             {
                 lblCurrentSchedule.Text = file.Name;
                 ViewDiv.InnerHtml = File.ReadAllText(file.FullName);

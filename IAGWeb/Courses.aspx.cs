@@ -20,14 +20,25 @@ namespace IAGWeb
         {
             if (!IsPostBack)
             {
-                LoadCourses();
+                if (string.IsNullOrWhiteSpace(Request.QueryString["id"]))
+                {
+                    LoadCourses();
+                }
+                else
+                {
+                    LoadCourses(id: Request.QueryString["id"]);
+                }
                 LoadFilters();
             }
         }
 
-        protected void LoadCourses(string year = null, string subject = null)
+        protected void LoadCourses(string id = null, string year = null, string subject = null)
         {
-            var courses = new StudentInformerDbContext().Courses.AsEnumerable();
+            var courses = DatabaseContext.Courses.AsEnumerable();
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                courses = courses.Where(c => c.Id.Equals(new Guid(id)));
+            }
             if (!string.IsNullOrWhiteSpace(year))
             {
                 courses = courses.Where(c => c.Year.Equals(year));
@@ -42,7 +53,7 @@ namespace IAGWeb
 
         protected void LoadFilters()
         {
-            var courses = new StudentInformerDbContext().Courses.AsEnumerable();
+            var courses = DatabaseContext.Courses.AsEnumerable();
 
             var years = courses.Select(c => c.Year).Distinct().OrderBy(c => c);
             var subjects = courses.Select(c => c.Subject).Distinct().OrderBy(c=> c);
@@ -164,7 +175,7 @@ namespace IAGWeb
         {
             var year = ddlYear.SelectedIndex != 0 ? ddlYear.SelectedValue : null;
             var subject = ddlSubject.SelectedIndex != 0 ? ddlSubject.SelectedValue : null;
-            LoadCourses(year, subject);
+            LoadCourses(year: year, subject: subject);
             
         }
     }

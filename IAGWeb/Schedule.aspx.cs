@@ -95,7 +95,7 @@ namespace IAGWeb
                         var fileName = Path.Combine(_schedulesFolder, txtNewSchedule.Text);
                         if (File.Exists(fileName))
                         {
-                            lblStatus.Text = "Exista deja un orar cu acest nume.";
+                            lblStatus.Text = "There is already an schedule with this name.";
                         }
                         else
                         {
@@ -107,7 +107,7 @@ namespace IAGWeb
                     }
                     catch (Exception ex)
                     {
-                        lblStatus.Text = "Orarul nu a putut fi adaugat! " + ex.ToString();
+                        lblStatus.Text = "The schedule could not be added! " + ex.ToString();
                     }
                     break;
                 case "delete":
@@ -120,7 +120,7 @@ namespace IAGWeb
                         }
                         catch (Exception ex)
                         {
-                            lblStatus.Text = "Orarul nu a putut fi sters! " + ex.ToString();
+                            lblStatus.Text = "The schedule could not be deleted! " + ex.ToString();
                         }
                     }
                     break;

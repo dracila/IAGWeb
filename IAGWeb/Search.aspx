@@ -1,12 +1,15 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Search.aspx.cs" Inherits="IAGWeb.Search" %>
+﻿<%@ Page Title="Search" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Search.aspx.cs" Inherits="IAGWeb.Search" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Cautare
+    Search
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:TextBox ID="txtSearch" runat="server">
     </asp:TextBox>
-    <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default" Text="Cauta" OnClick="btnSearch_Click" />
+    <p></p>
+    <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default" Text="Search" OnClick="btnSearch_Click" />
     <br />
+    <p></p>
+    <p></p>
     <asp:Panel ID="pnlResults" runat="server">
         <asp:Repeater ID="rptResults" runat="server">
             <HeaderTemplate>

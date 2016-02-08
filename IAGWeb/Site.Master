@@ -23,20 +23,20 @@
 <body>
     <form runat="server">
         <div id="header">
-                <a class="logo" runat="server"><asp:Image ImageUrl="~/Content/logo.png" runat="server" width="40" hight="57"/><strong>Transilvania University of Brasov</strong> <titlu> Applied Informatics in german</titlu></a>
+                <a class="logo" runat="server"><asp:Image ImageUrl="~/Content/logo.png" runat="server" width="6.9%" hight=""/><tit>Transilvania University of Brasov</tit> <titlu> Applied Informatics in german</titlu></a>
 				<nav id="nav">
 					<ul>
 						<li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/Schedule">Orar</a></li>
+                        <li><a runat="server" href="~/Info.aspx">Useful</a></li>
+                        <li><a runat="server" href="~/Schedule">Schedule</a></li>
                         <asp:LoginView runat="server" ViewStateMode="Disabled">
                             <LoggedInTemplate>
-                                <li><a runat="server" href="~/Courses">Cursuri</a></li>
-                                <li><a runat="server" href="~/Projects">Proiecte</a></li>
-                                <li><a runat="server" href="~/Collective">Colectiv</a></li>
+                                <li><a runat="server" href="~/Courses">Courses</a></li>
+                                <li><a runat="server" href="~/Projects">Projekts</a></li>
+                                <li><a runat="server" href="~/Collective">Personnel</a></li>
                             </LoggedInTemplate>
                         </asp:LoginView>
-                        <li><a runat="server" href="~/Info.aspx">Utile</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                        <li><a runat="server" href="~/Contact">Contacts</a></li>
                         <asp:LoginView runat="server" ViewStateMode="Disabled">
                             <RoleGroups>
                                 <asp:RoleGroup Roles="Admin">
@@ -60,7 +60,7 @@
                                 </li>
                             </LoggedInTemplate>
                     </asp:LoginView>
-                        <li><a runat="server"  href="~/Search.aspx">Cautare</a></li>
+                        <li><a runat="server"  href="~/Search.aspx">Search</a></li>
 
                         <%--<li><a href="index.html">Home</a></li>
 						<li>

@@ -755,6 +755,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Auth\RoleActions.cs" />
+    <Compile Include="BaseContentPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="BaseDataPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

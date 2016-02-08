@@ -50,7 +50,7 @@ namespace IAGWeb.Account
                         break;
                     case SignInStatus.Failure:
                     default:
-                        FailureText.Text = "Credentials incorrect!";
+                        FailureText.Text = "Credentiale incorecte!";
                         ErrorMessage.Visible = true;
                         break;
                 }

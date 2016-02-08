@@ -1859,20 +1859,15 @@
 
 	strong, b {
 		color: #5e5e5e;
-	}
-	
-	tit{
-		font-weight: bold;
-		color: #5e5e5e;
 		position: relative;
-		top: -33px;
+		top: -40px;
 	}
 	
 	titlu{
 	color: #5e5e5e;
 	position:relative;
-	left: -51%;
-	top: -12px;
+	left: -285px;
+	top: -15px;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -2240,7 +2235,6 @@
 	textarea {
 		background: rgba(144, 144, 144, 0.075);
 		border-color: #e3e3e3;
-		width: 200px
 	}
 
 		input[type="text"]:focus,

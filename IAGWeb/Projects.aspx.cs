@@ -142,13 +142,13 @@ namespace IAGWeb
             if (project == null)
             {
                 nameTexbox.Text = string.Empty;
-                submitButton.Text = "Add";
+                submitButton.Text = "Adauga";
                 submitButton.CommandArgument = string.Empty;
             }
             else
             {
                 nameTexbox.Text = project.Name;
-                submitButton.Text = "Update";
+                submitButton.Text = "Actualizeaza";
                 submitButton.CommandArgument = project.Id.ToString();
             }
         }
@@ -201,13 +201,13 @@ namespace IAGWeb
             switch (projectStatus)
             {
                 case ProjectStatus.Complete:
-                    return "Complete";
+                    return "Complet";
                 case ProjectStatus.Created:
-                    return "New";
+                    return "Nou";
                 case ProjectStatus.Incomplete:
-                    return "Incomplete";
+                    return "Incomplet";
             }
-            return "Unknown";
+            return "Necunoscut";
         }
 
         protected void ProjectsGrid_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -338,14 +338,14 @@ namespace IAGWeb
 
                 LoadProjects();
 
-                statusLabel.Text = "The project has been added with success.";
+                statusLabel.Text = "Proiectul a fost adaugat cu succes.";
                 ProjectUpdatePanel.Visible = false;
                 CommentsPanel.Visible = false;
                 ProjectActionTitle.Text = string.Empty;
             }
             catch (Exception ex)
             {
-                statusLabel.Text = "The project could not be added. " + ex.ToString();
+                statusLabel.Text = "Proiectul nu a putut fi adaugat. " + ex.ToString();
             }
         }
 
@@ -444,7 +444,7 @@ namespace IAGWeb
 
                 reviewerLabel.Text = FormatName(reviewer.FirstName, reviewer.LastName);
                 dateLabel.Text = projectHistory.ChangeDate.ToString();
-                changeLabel.Text = string.Format("New Status: {0}", GetStatusDescription(projectHistory.NewStatus));
+                changeLabel.Text = string.Format("Status nou: {0}", GetStatusDescription(projectHistory.NewStatus));
                 commentLabel.Text = projectHistory.Comments;
             }
             else if (e.Item.ItemType == ListItemType.Footer)
@@ -455,7 +455,7 @@ namespace IAGWeb
 
         protected void AddNewProject_Click(object sender, EventArgs e)
         {
-            ProjectActionTitle.Text = "Add new project:";
+            ProjectActionTitle.Text = "Adauga Proiect Nou";
             LoadProjectForm(null);
             ProjectUpdatePanel.Visible = true;
             CommentsPanel.Visible = false;

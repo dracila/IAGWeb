@@ -60,8 +60,8 @@ namespace IAGWeb
 
             ddlYear.Items.Clear();
             ddlSubject.Items.Clear();
-            ddlYear.Items.Add(" - All - ");
-            ddlSubject.Items.Add(" - All - ");
+            ddlYear.Items.Add(" - Toate - ");
+            ddlSubject.Items.Add(" - Toate - ");
 
             ddlYear.Items.AddRange(years.Select(y=> new ListItem(y)).ToArray());
             ddlSubject.Items.AddRange(subjects.Select(s => new ListItem(s)).ToArray());
@@ -108,7 +108,7 @@ namespace IAGWeb
             ((TextBox)ProfessorLogin.FindControl("Year")).Text = string.Empty;
             ((TextBox)ProfessorLogin.FindControl("Semester")).Text = string.Empty;
             ((TextBox)ProfessorLogin.FindControl("Subject")).Text = string.Empty;
-            ((Label)ProfessorLogin.FindControl("StatusMessageLabel")).Text = "Course successfully added!";
+            ((Label)ProfessorLogin.FindControl("StatusMessageLabel")).Text = "Curs adaugat cu succes.";
 
             LoadCourses();
             LoadFilters();

@@ -1,12 +1,12 @@
-﻿<%@ Page Title="Schedule" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Schedule.aspx.cs" Inherits="IAGWeb.Schedule" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Schedule.aspx.cs" Inherits="IAGWeb.Schedule" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %> 
 
 <asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
-    Schedule
+    Orar
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <!--<h4>Schedule</h4>-->
+    <h4>Orar</h4>
     <hr />
     <asp:Label ID="lblStatus" runat="server" EnableViewState="false" CssClass="has-error"></asp:Label>
     <asp:Repeater ID="rptSchedules"
@@ -20,16 +20,14 @@
         </ItemTemplate>
     </asp:Repeater>
     <br />
-    <!--<h4><asp:Label ID="lblCurrentSchedule" runat="server"></asp:Label></h4>-->
-    <p></p>
+    <h4><asp:Label ID="lblCurrentSchedule" runat="server"></asp:Label></h4>
     <asp:Panel ID="AdminPanel" runat="server">
-        <h3>Add a new schedule</h3>
+        Adauga orar nou
         <asp:TextBox ID="txtNewSchedule" runat="server">
         </asp:TextBox>
-        <p></p>
-        <asp:Button ID="AddButton" runat="server" CssClass="btn btn-default" OnClick="AdminButton_Click" Text="Add" CommandName="add" />
-        <asp:Button ID="UpdateButton" runat="server" CssClass="btn btn-default" OnClick="AdminButton_Click" Text="Update" CommandName="update" />
-        <asp:Button ID="DeleteButton" runat="server" CssClass="btn btn-default" OnClick="AdminButton_Click" Text="Delete" CommandName="delete" OnClientClick="return confirm('Are you sure that you want to delete it?');" />
+        <asp:Button ID="AddButton" runat="server" CssClass="btn btn-default" OnClick="AdminButton_Click" Text="Adauga" CommandName="add" />
+        <asp:Button ID="UpdateButton" runat="server" CssClass="btn btn-default" OnClick="AdminButton_Click" Text="Actualizeaza" CommandName="update" />
+        <asp:Button ID="DeleteButton" runat="server" CssClass="btn btn-default" OnClick="AdminButton_Click" Text="Sterge" CommandName="delete" OnClientClick="return confirm('Sunteti sigur ca doriti sa stergeti acest orar?');" />
     </asp:Panel>
     <asp:Panel ID="ViewPanel" runat="server">
         <div id="ViewDiv" runat="server" enableviewstate="false"></div>

@@ -1,12 +1,12 @@
-﻿<%@ Page Title="User Roles" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UserRoles.aspx.cs" Inherits="IAGWeb.Admin.UserRoles" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UserRoles.aspx.cs" Inherits="IAGWeb.Admin.UserRoles" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>User Role Administration</h2>
+    <h2>Administrare Roluri ale Userilor</h2>
     <p align="center">
         <asp:Label ID="ActionStatus" runat="server" CssClass="Important"></asp:Label>
     </p>
-    <h3>Role Administration depanding on the User</h3>
+    <h3>Administrare Roluri in functie de User</h3>
     <p>
-        <b>Select a User:</b>
+        <b>Selecteaza un User:</b>
         <asp:DropDownList ID="UserList" runat="server" AutoPostBack="True" 
             DataTextField="UserName" DataValueField="UserName" 
             onselectedindexchanged="UserList_SelectedIndexChanged">
@@ -21,16 +21,16 @@
         </asp:Repeater>
     </p>
     
-    <h3>User Administration depanding on the Role</h3>
+    <h3>Administrare Useri in functie de Rol</h3>
     <p>
-        <b>Select a Role:</b>
+        <b>Selecteaza un Rol:</b>
         <asp:DropDownList ID="RoleList" runat="server" AutoPostBack="true" 
             onselectedindexchanged="RoleList_SelectedIndexChanged">
         </asp:DropDownList>
     </p>
     <p>
         <asp:GridView ID="RolesUserList" runat="server" AutoGenerateColumns="False" 
-            EmptyDataText="There are no users assigned to this role." 
+            EmptyDataText="Nu exista Useri apartinand acestui Rol." 
             onrowdeleting="RolesUserList_RowDeleting"
              GridLines="None"  
             AllowPaging="false"  
@@ -38,8 +38,8 @@
             PagerStyle-CssClass="pgr"  
             AlternatingRowStyle-CssClass="alt">
             <Columns>
-                <asp:CommandField DeleteText="Delete" ShowDeleteButton="True" HeaderStyle-Width="100"  />
-                <asp:TemplateField HeaderText="Users">
+                <asp:CommandField DeleteText="Sterge" ShowDeleteButton="True" HeaderStyle-Width="100"  />
+                <asp:TemplateField HeaderText="Useri">
                     <ItemTemplate>
                         <asp:Label runat="server" id="UserNameLabel" Text='<%# Container.DataItem %>'></asp:Label>
                     </ItemTemplate>
@@ -51,7 +51,7 @@
         <b>UserName:</b>
         <asp:TextBox ID="UserNameToAddToRole" runat="server"></asp:TextBox>
         <br />
-        <asp:Button ID="AddUserToRoleButton" runat="server" Text="Add this user to the selected role" 
+        <asp:Button ID="AddUserToRoleButton" runat="server" Text="Adauga acest User la Rolul selectat" 
             onclick="AddUserToRoleButton_Click"  CssClass="btn btn-default" />
     </p>
 </asp:Content>

@@ -92,7 +92,7 @@ namespace IAGWeb.Admin
                 UserManager.AddToRole(UserManager.FindByName(selectedUserName).Id, roleName);
                 
                 // Display a status message
-                ActionStatus.Text = string.Format("User {0} was added to the role {1}.", selectedUserName, roleName);
+                ActionStatus.Text = string.Format("Userul {0} a fost adaugat la Rolul {1}.", selectedUserName, roleName);
             }
             else
             {
@@ -100,7 +100,7 @@ namespace IAGWeb.Admin
                 UserManager.RemoveFromRole(UserManager.FindByName(selectedUserName).Id, roleName);
 
                 // Display a status message
-                ActionStatus.Text = string.Format("User {0} has been removed from the role {1}.", selectedUserName, roleName);
+                ActionStatus.Text = string.Format("Userul {0} a fost sters de la Rolul {1}.", selectedUserName, roleName);
             }
 
             // Refresh the "by role" interface

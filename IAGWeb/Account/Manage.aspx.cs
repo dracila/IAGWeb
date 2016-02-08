@@ -61,8 +61,8 @@ namespace IAGWeb.Account
                     Form.Action = ResolveUrl("~/Account/Manage");
 
                     SuccessMessage =
-                        message == "ChangePwdSuccess" ? "Password changed successfully."
-                        : message == "UpdateSuccess" ? "The new informations where successfully updated."
+                        message == "ChangePwdSuccess" ? "Parola a fost schimbata cu succes."
+                        : message == "UpdateSuccess" ? "Informatiile contului au fost salvate cu succes."
                         : String.Empty;
                     successMessage.Visible = !String.IsNullOrEmpty(SuccessMessage);
                 }

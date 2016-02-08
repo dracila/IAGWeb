@@ -92,7 +92,7 @@ namespace IAGWeb
         private SearchResultItem GetResultFromCourse(Course course)
         {
             var result = new SearchResultItem();
-            result.Title = "Curs";
+            result.Title = "Courses";
             result.Description = string.Format("Nume curs {0}, an {1}, semestru {2}, materie {3}. ", course.Name, course.Year, course.Semester, course.Subject);
             result.Link = string.Format("<a href='Courses?id={0}'>{1}</a>", course.Id, course.Name);
 
@@ -102,7 +102,7 @@ namespace IAGWeb
         private SearchResultItem GetResultFromSchedule(FileInfo file, string phrase)
         {
             var result = new SearchResultItem();
-            result.Title = "Orar";
+            result.Title = "Schedule";
             result.Description = string.Format("... {0} ... ", phrase);
             result.Link = string.Format("<a href='Schedule?name={0}'>{1}</a>", file.Name, file.Name);
 
